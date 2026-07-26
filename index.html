@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BEM UMS — Badan Eksekutif Mahasiswa Universitas Muhammadiyah Surakarta</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;700&display=swap" rel="stylesheet">
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#b90014',
+            'primary-container': '#e31b23',
+            'on-primary': '#ffffff',
+            'on-primary-container': '#fff9f8',
+            surface: '#f9f9f9',
+            'surface-dim': '#dadada',
+            'surface-bright': '#f9f9f9',
+            'surface-container': '#eeeeee',
+            'surface-container-low': '#f4f3f3',
+            'surface-container-lowest': '#ffffff',
+            'surface-container-high': '#e8e8e8',
+            'surface-container-highest': '#e2e2e2',
+            'on-surface': '#1a1c1c',
+            'on-surface-variant': '#5d3f3c',
+            'inverse-surface': '#2f3131',
+            'inverse-on-surface': '#f1f1f1',
+            secondary: '#5f5e5e',
+            'on-secondary': '#ffffff',
+            'secondary-container': '#e5e2e1',
+            'on-secondary-container': '#656464',
+            tertiary: '#5b5b5a',
+            'on-tertiary': '#ffffff',
+            'tertiary-container': '#747373',
+            'on-tertiary-container': '#fdfaf9',
+            outline: '#926e6b',
+            'outline-variant': '#e7bdb8',
+            'on-background': '#1a1c1c',
+            background: '#f9f9f9',
+          },
+          fontFamily: {
+            display: ['Anton', 'sans-serif'],
+            body: ['Inter', 'sans-serif'],
+          },
+          fontSize: {
+            'display-lg': ['96px', { lineHeight: '90px' }],
+            'display-lg-mobile': ['56px', { lineHeight: '52px' }],
+            'headline-xl': ['64px', { lineHeight: '60px' }],
+            'headline-lg': ['48px', { lineHeight: '44px' }],
+            'headline-md': ['32px', { lineHeight: '32px' }],
+            'body-lg': ['18px', { lineHeight: '28px' }],
+            'body-md': ['16px', { lineHeight: '24px' }],
+            'label-sm': ['12px', { lineHeight: '16px', letterSpacing: '0.1em' }],
+          },
+          spacing: {
+            'unit': '4px',
+            'gutter': '32px',
+            'margin-desktop': '64px',
+            'margin-mobile': '20px',
+            'block-gap': '48px',
+          },
+          screens: {
+            'xs': '375px',
+          }
+        }
+      }
+    }
+  </script>
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="bg-background font-body text-on-surface">
+
+  <!-- ===== NAVBAR ===== -->
+  <header class="fixed top-0 w-full z-50 bg-surface-container-lowest border-b-4 border-on-surface">
+    <div class="h-16 md:h-20 w-full px-margin-mobile md:px-margin-desktop flex items-center justify-between">
+      <div class="flex items-center gap-3 md:gap-4">
+        <div class="w-8 h-8 md:w-10 md:h-10 bg-primary flex items-center justify-center text-on-primary font-display text-sm md:text-xl">B</div>
+        <span class="font-display text-headline-md text-xl md:text-headline-md uppercase tracking-tighter">BEM UMS</span>
+      </div>
+      <nav class="hidden lg:flex items-center gap-8 xl:gap-10">
+        <a href="#" class="font-body text-label-sm uppercase text-primary transition-colors">Beranda</a>
+        <a href="#" class="font-body text-label-sm uppercase text-on-surface-variant hover:text-primary transition-colors">Struktural</a>
+        <a href="#" class="font-body text-label-sm uppercase text-on-surface-variant hover:text-primary transition-colors">Artikel</a>
+        <a href="#" class="font-body text-label-sm uppercase text-on-surface-variant hover:text-primary transition-colors">Dokumentasi</a>
+        <a href="#" class="font-body text-label-sm uppercase text-on-surface-variant hover:text-primary transition-colors">Tentang Kami</a>
+      </nav>
+      <div class="flex items-center gap-3 md:gap-6">
+        <button class="hidden sm:inline-block bg-primary-container text-on-primary-container font-body text-label-sm px-5 md:px-8 py-2 md:py-3 uppercase hover:bg-primary hover:text-on-primary transition-all text-xs md:text-label-sm">Gabung</button>
+        <button id="hamburger" class="lg:hidden flex flex-col gap-1.5 p-2" aria-label="Toggle menu">
+          <span class="block w-6 h-0.5 bg-on-surface transition-transform"></span>
+          <span class="block w-6 h-0.5 bg-on-surface transition-opacity"></span>
+          <span class="block w-6 h-0.5 bg-on-surface transition-transform"></span>
+        </button>
+      </div>
+    </div>
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="hidden lg:hidden bg-surface-container-lowest border-t-2 border-on-surface/10">
+      <div class="px-margin-mobile py-6 flex flex-col gap-4">
+        <a href="#" class="font-body text-label-sm uppercase text-primary transition-colors py-2">Beranda</a>
+        <a href="#" class="font-body text-label-sm uppercase text-on-surface-variant hover:text-primary transition-colors py-2">Struktural</a>
+        <a href="#" class="font-body text-label-sm uppercase text-on-surface-variant hover:text-primary transition-colors py-2">Artikel</a>
+        <a href="#" class="font-body text-label-sm uppercase text-on-surface-variant hover:text-primary transition-colors py-2">Dokumentasi</a>
+        <a href="#" class="font-body text-label-sm uppercase text-on-surface-variant hover:text-primary transition-colors py-2">Tentang Kami</a>
+        <button class="sm:hidden bg-primary-container text-on-primary-container font-body text-label-sm px-8 py-3 uppercase hover:bg-primary hover:text-on-primary transition-all mt-2 w-full text-center">Gabung</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="pt-16 md:pt-20">
+
+    <!-- ===== HERO SECTION ===== -->
+    <section class="relative w-full px-margin-mobile md:px-margin-desktop py-10 md:py-block-gap bg-background overflow-hidden">
+      <div class="grid grid-cols-12 gap-6 md:gap-gutter items-center">
+        <div class="col-span-12 lg:col-span-7 flex flex-col z-10">
+          <div class="flex items-center gap-3 md:gap-4 mb-3 md:mb-4">
+            <span class="font-body text-label-sm text-primary uppercase tracking-wider">BEM UMS 2025/2026</span>
+            <span class="w-8 md:w-12 h-[2px] bg-primary"></span>
+          </div>
+          <h1 class="font-display text-4xl xs:text-5xl sm:text-display-lg-mobile lg:text-display-lg uppercase leading-none mb-4 md:mb-6">
+            KABINET<br>
+            TRANSFORMASI<br>
+            <span class="text-primary">PROGRESIF</span>
+          </h1>
+          <div class="max-w-xl">
+            <p class="font-display text-xl sm:text-headline-md uppercase mb-4 md:mb-6 text-on-surface">
+              Badan Eksekutif Mahasiswa Universitas Muhammadiyah Surakarta
+            </p>
+            <p class="font-body text-body-md md:text-body-lg text-secondary mb-8 md:mb-10 leading-relaxed">
+              Bergerak dengan integritas, berinovasi dengan aksi. Wadah aspirasi mahasiswa Universitas Muhammadiyah Surakarta untuk mewujudkan kampus yang berdaya saing global.
+            </p>
+            <div class="flex items-center gap-6 md:gap-8">
+              <button class="group relative w-16 h-16 md:w-24 md:h-24 bg-primary-container rounded-full flex items-center justify-center transition-transform hover:scale-110 active:scale-95">
+                <span class="material-symbols-outlined text-on-primary text-2xl md:text-4xl group-hover:translate-x-1 transition-transform">arrow_forward</span>
+                <svg class="absolute inset-0 w-full h-full -rotate-90" viewBox="0 0 100 100">
+                  <circle class="text-on-primary-container opacity-20" cx="50" cy="50" fill="none" r="48" stroke="currentColor" stroke-width="2"></circle>
+                  <path class="text-on-primary" d="M 50,2 A 48,48 0 0 1 98,50" fill="none" stroke="currentColor" stroke-width="2"></path>
+                </svg>
+              </button>
+              <span class="font-body text-label-sm uppercase tracking-widest">Lihat Kami</span>
+            </div>
+          </div>
+        </div>
+        <div class="col-span-12 lg:col-span-5 relative mt-8 lg:mt-0">
+          <div class="absolute -top-4 md:-top-6 -left-4 md:-left-6 font-body text-label-sm uppercase bg-on-surface text-on-tertiary px-3 md:px-4 py-1.5 md:py-2 z-20 text-xs md:text-label-sm">
+            PERIODE 2025/2026
+          </div>
+          <div class="absolute top-8 md:top-12 left-8 md:left-12 w-full h-full bg-primary-container z-0"></div>
+          <div class="relative z-10 aspect-[3/4] overflow-hidden grayscale contrast-125 border-[8px] md:border-[12px] border-surface-container-lowest bg-surface-container-high">
+            <div class="w-full h-full flex items-center justify-center text-on-surface-variant font-display text-headline-md uppercase p-6 md:p-8 text-center">
+              Foto Ketua BEM UMS
+            </div>
+          </div>
+          <div class="hidden md:block absolute -bottom-10 -left-10 w-48 h-48 z-30 animate-spin-slow">
+            <svg class="w-full h-full" viewBox="0 0 200 200">
+              <path d="M 100, 100 m -75, 0 a 75,75 0 1,0 150,0 a 75,75 0 1,0 -150,0" fill="transparent" id="circlePath"></path>
+              <text class="font-body text-[14px] uppercase fill-on-surface font-bold">
+                <textPath href="#circlePath">KABINET TRANSFORMASI PROGRESIF - BEM UMS 2025 - </textPath>
+              </text>
+            </svg>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== STATS BAR ===== -->
+    <section class="w-full bg-on-surface py-10 md:py-16 px-margin-mobile md:px-margin-desktop">
+      <div class="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-3 gap-8 md:gap-12">
+        <div class="flex flex-col items-center sm:items-start sm:border-r border-tertiary-container/30 last:border-r-0">
+          <span class="font-display text-primary text-5xl sm:text-7xl md:text-8xl">15</span>
+          <span class="font-body text-label-sm text-on-tertiary uppercase mt-1 md:mt-2">Tahun Berdiri</span>
+        </div>
+        <div class="flex flex-col items-center sm:items-start sm:border-r border-tertiary-container/30 last:border-r-0">
+          <span class="font-display text-primary text-5xl sm:text-7xl md:text-8xl">12</span>
+          <span class="font-body text-label-sm text-on-tertiary uppercase mt-1 md:mt-2">Kementerian Aktif</span>
+        </div>
+        <div class="flex flex-col items-center sm:items-start">
+          <span class="font-display text-primary text-5xl sm:text-7xl md:text-8xl">80+</span>
+          <span class="font-body text-label-sm text-on-tertiary uppercase mt-1 md:mt-2">Anggota Struktural</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== ARTIKEL SECTION ===== -->
+    <section class="w-full px-margin-mobile md:px-margin-desktop py-10 md:py-block-gap bg-surface">
+      <div class="flex flex-col sm:flex-row justify-between items-start sm:items-end gap-4 mb-8 md:mb-16">
+        <h2 class="font-display text-4xl sm:text-headline-xl uppercase">Artikel</h2>
+        <a href="#" class="flex items-center gap-2 group text-primary font-body text-label-sm uppercase tracking-widest pb-2 border-b-2 border-primary text-xs sm:text-label-sm">
+          Lihat Semua Artikel
+          <span class="material-symbols-outlined text-lg sm:text-xl group-hover:translate-x-2 transition-transform">arrow_right_alt</span>
+        </a>
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5 md:gap-gutter">
+        <article class="group cursor-pointer">
+          <div class="relative overflow-hidden aspect-[4/5] mb-4 md:mb-6 bg-surface-container-high">
+            <div class="absolute inset-0 bg-on-surface/40 group-hover:bg-on-surface/10 transition-colors z-10"></div>
+            <div class="w-full h-full flex items-center justify-center text-on-surface-variant font-body text-label-sm uppercase p-6 md:p-8 text-center">
+              Foto Artikel
+            </div>
+            <div class="absolute top-4 md:top-6 left-4 md:left-6 z-20">
+              <span class="bg-primary text-on-primary px-2 md:px-3 py-0.5 md:py-1 font-body text-label-sm uppercase text-xs">Berita</span>
+            </div>
+            <div class="absolute bottom-4 md:bottom-6 left-4 md:left-6 z-20 text-on-tertiary">
+              <span class="font-body text-label-sm block mb-1 md:mb-2 opacity-80">2025</span>
+              <h3 class="font-display text-xl sm:text-headline-md uppercase leading-tight">Revitalisasi Fasilitas Olahraga Kampus Terpadu</h3>
+            </div>
+          </div>
+        </article>
+        <article class="group cursor-pointer">
+          <div class="relative overflow-hidden aspect-[4/5] mb-4 md:mb-6 bg-surface-container-high">
+            <div class="absolute inset-0 bg-on-surface/40 group-hover:bg-on-surface/10 transition-colors z-10"></div>
+            <div class="w-full h-full flex items-center justify-center text-on-surface-variant font-body text-label-sm uppercase p-6 md:p-8 text-center">
+              Foto Artikel
+            </div>
+            <div class="absolute top-4 md:top-6 left-4 md:left-6 z-20">
+              <span class="bg-primary text-on-primary px-2 md:px-3 py-0.5 md:py-1 font-body text-label-sm uppercase text-xs">Opini</span>
+            </div>
+            <div class="absolute bottom-4 md:bottom-6 left-4 md:left-6 z-20 text-on-tertiary">
+              <span class="font-body text-label-sm block mb-1 md:mb-2 opacity-80">2025</span>
+              <h3 class="font-display text-xl sm:text-headline-md uppercase leading-tight">Suara Mahasiswa: Urgensi Kebebasan Akademik</h3>
+            </div>
+          </div>
+        </article>
+        <article class="group cursor-pointer sm:col-span-2 md:col-span-1">
+          <div class="relative overflow-hidden aspect-[4/5] mb-4 md:mb-6 bg-surface-container-high">
+            <div class="absolute inset-0 bg-on-surface/40 group-hover:bg-on-surface/10 transition-colors z-10"></div>
+            <div class="w-full h-full flex items-center justify-center text-on-surface-variant font-body text-label-sm uppercase p-6 md:p-8 text-center">
+              Foto Artikel
+            </div>
+            <div class="absolute top-4 md:top-6 left-4 md:left-6 z-20">
+              <span class="bg-primary text-on-primary px-2 md:px-3 py-0.5 md:py-1 font-body text-label-sm uppercase text-xs">Kegiatan</span>
+            </div>
+            <div class="absolute bottom-4 md:bottom-6 left-4 md:left-6 z-20 text-on-tertiary">
+              <span class="font-body text-label-sm block mb-1 md:mb-2 opacity-80">2025</span>
+              <h3 class="font-display text-xl sm:text-headline-md uppercase leading-tight">Diskusi Publik: Masa Depan Pendidikan Tinggi</h3>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- ===== LAYANAN SECTION ===== -->
+    <section class="w-full bg-on-surface">
+      <div class="grid grid-cols-12">
+        <div class="col-span-12 lg:col-span-4 bg-primary-container px-margin-mobile md:px-margin-desktop py-10 md:p-margin-desktop flex flex-col justify-between min-h-[200px] md:min-h-[400px]">
+          <h2 class="font-display text-5xl sm:text-display-lg-mobile lg:text-display-lg text-on-primary uppercase leading-none">Layanan</h2>
+          <span class="material-symbols-outlined text-6xl md:text-8xl text-on-primary self-end mt-4 md:mt-0">north_east</span>
+        </div>
+        <div class="col-span-12 lg:col-span-8 p-margin-mobile md:p-margin-desktop grid grid-cols-1 sm:grid-cols-2 gap-5 md:gap-gutter items-center">
+          <div class="group p-6 md:p-8 bg-surface-container-low hover:bg-primary transition-colors cursor-pointer">
+            <div class="w-12 h-12 md:w-16 md:h-16 rounded-full border-2 border-primary group-hover:border-on-primary flex items-center justify-center mb-4 md:mb-6">
+              <span class="material-symbols-outlined text-primary group-hover:text-on-primary text-2xl md:text-3xl">campaign</span>
+            </div>
+            <h3 class="font-display text-xl sm:text-headline-md text-on-surface group-hover:text-on-primary uppercase mb-3 md:mb-4">Lapor Pres!</h3>
+            <p class="font-body text-body-md text-secondary group-hover:text-on-primary/80">Kanal pengaduan advokasi dan aspirasi mahasiswa untuk menyampaikan kendala akademik maupun fasilitas.</p>
+          </div>
+          <div class="group p-6 md:p-8 bg-surface-container-low hover:bg-primary transition-colors cursor-pointer">
+            <div class="w-12 h-12 md:w-16 md:h-16 rounded-full border-2 border-primary group-hover:border-on-primary flex items-center justify-center mb-4 md:mb-6">
+              <span class="material-symbols-outlined text-primary group-hover:text-on-primary text-2xl md:text-3xl">volunteer_activism</span>
+            </div>
+            <h3 class="font-display text-xl sm:text-headline-md text-on-surface group-hover:text-on-primary uppercase mb-3 md:mb-4">Jadilah Volunteer</h3>
+            <p class="font-body text-body-md text-secondary group-hover:text-on-primary/80">Daftarkan dirimu untuk berkontribusi dalam berbagai proyek sosial dan pengabdian masyarakat BEM UMS.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== VISI MISI SECTION ===== -->
+    <section class="w-full px-margin-mobile md:px-margin-desktop py-10 md:py-block-gap bg-background">
+      <div class="grid grid-cols-12 gap-6 md:gap-gutter">
+        <div class="col-span-12 lg:col-span-5 relative order-2 lg:order-1 mt-8 lg:mt-0">
+          <div class="absolute top-6 md:top-8 right-6 md:right-8 w-full h-full bg-primary z-0"></div>
+          <div class="relative z-10 grayscale border-[6px] md:border-[8px] border-surface-lowest bg-surface-container-high aspect-[3/4] flex items-center justify-center">
+            <span class="text-on-surface-variant font-body text-label-sm uppercase text-center p-6 md:p-8">Foto Pimpinan BEM UMS</span>
+          </div>
+          <div class="mt-6 md:mt-8 text-right">
+            <p class="font-body text-body-md md:text-body-lg italic opacity-70 mb-1 md:mb-2">Tertanda,</p>
+            <p class="text-2xl md:text-4xl font-display text-on-surface uppercase tracking-tight">Pimpinan BEM UMS</p>
+          </div>
+        </div>
+        <div class="col-span-12 lg:col-span-7 flex flex-col justify-center order-1 lg:order-2">
+          <span class="font-body text-label-sm text-primary uppercase mb-3 md:mb-4">Visi & Misi</span>
+          <h2 class="font-display text-3xl sm:text-display-lg-mobile lg:text-headline-xl uppercase mb-6 md:mb-8 leading-tight">
+            MENCIPTAKAN EKOSISTEM KAMPUS YANG INKLUSIF DAN PROGRESIF
+          </h2>
+          <p class="font-body text-body-md md:text-body-lg text-secondary mb-8 md:mb-12 max-w-2xl leading-relaxed">
+            Visi kami adalah menjadi motor penggerak perubahan yang inklusif, transparan, dan berorientasi pada kesejahteraan mahasiswa melalui program kerja yang nyata dan berkelanjutan.
+          </p>
+          <div class="space-y-5 md:space-y-8 mb-8 md:mb-12 max-w-xl">
+            <div>
+              <div class="flex justify-between font-body text-label-sm uppercase mb-1 md:mb-2">
+                <span>Advokasi</span>
+                <span>95%</span>
+              </div>
+              <div class="h-1.5 md:h-2 bg-surface-container-highest w-full">
+                <div class="h-full bg-primary" style="width: 95%"></div>
+              </div>
+            </div>
+            <div>
+              <div class="flex justify-between font-body text-label-sm uppercase mb-1 md:mb-2">
+                <span>Sosial</span>
+                <span>90%</span>
+              </div>
+              <div class="h-1.5 md:h-2 bg-surface-container-highest w-full">
+                <div class="h-full bg-primary" style="width: 90%"></div>
+              </div>
+            </div>
+            <div>
+              <div class="flex justify-between font-body text-label-sm uppercase mb-1 md:mb-2">
+                <span>Akademik</span>
+                <span>85%</span>
+              </div>
+              <div class="h-1.5 md:h-2 bg-surface-container-highest w-full">
+                <div class="h-full bg-primary" style="width: 85%"></div>
+              </div>
+            </div>
+            <div>
+              <div class="flex justify-between font-body text-label-sm uppercase mb-1 md:mb-2">
+                <span>Kreativitas</span>
+                <span>80%</span>
+              </div>
+              <div class="h-1.5 md:h-2 bg-surface-container-highest w-full">
+                <div class="h-full bg-primary" style="width: 80%"></div>
+              </div>
+            </div>
+          </div>
+          <button class="bg-on-surface text-on-tertiary px-8 md:px-12 py-4 md:py-5 font-body text-label-sm uppercase tracking-widest hover:bg-primary transition-colors w-fit text-xs md:text-label-sm">
+            Lihat Program Kerja
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== PARTNER LOGOS ===== -->
+    <section class="w-full bg-surface-container border-y border-on-surface/10 py-8 md:py-12 px-margin-mobile md:px-margin-desktop">
+      <div class="flex flex-wrap justify-center sm:justify-between items-center gap-6 md:gap-12 opacity-40 grayscale">
+        <div class="h-10 md:h-12 w-24 md:w-32 bg-on-surface/20 flex items-center justify-center font-display text-base md:text-xl uppercase tracking-tighter">DIKTI</div>
+        <div class="h-10 md:h-12 w-24 md:w-32 bg-on-surface/20 flex items-center justify-center font-display text-base md:text-xl uppercase tracking-tighter">BEM SI</div>
+        <div class="h-10 md:h-12 w-24 md:w-32 bg-on-surface/20 flex items-center justify-center font-display text-base md:text-xl uppercase tracking-tighter">DPM UMS</div>
+        <div class="h-10 md:h-12 w-24 md:w-32 bg-on-surface/20 flex items-center justify-center font-display text-base md:text-xl uppercase tracking-tighter">MENTARI</div>
+        <div class="h-10 md:h-12 w-24 md:w-32 bg-on-surface/20 flex items-center justify-center font-display text-base md:text-xl uppercase tracking-tighter">SURAKARTA</div>
+      </div>
+    </section>
+
+    <!-- ===== CTA FOOTER ===== -->
+    <section class="w-full bg-primary-container px-margin-mobile md:px-margin-desktop py-10 md:p-margin-desktop">
+      <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between gap-10 md:gap-16">
+        <div class="flex-1">
+          <h2 class="font-display text-4xl sm:text-display-lg-mobile lg:text-display-lg text-on-primary-container uppercase leading-none mb-8 md:mb-12">
+            MARI BERKOLABORASI<br>BERSAMA KAMI
+          </h2>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-8 md:gap-12">
+            <div>
+              <h4 class="font-body text-label-sm text-on-primary-container uppercase tracking-widest mb-4 md:mb-6 border-b border-on-primary-container/20 pb-2">Hubungi Kami</h4>
+              <ul class="space-y-3 md:space-y-4 font-body text-body-md md:text-body-lg text-on-primary-container">
+                <li>Gedung Student Center UMS,<br>Jl. Ahmad Yani, Pabelan.</li>
+                <li>bem@ums.ac.id</li>
+                <li>+62 812-3456-7890</li>
+              </ul>
+            </div>
+            <div>
+              <h4 class="font-body text-label-sm text-on-primary-container uppercase tracking-widest mb-4 md:mb-6 border-b border-on-primary-container/20 pb-2">Ikuti Kami</h4>
+              <div class="flex flex-wrap gap-4 text-on-primary-container font-display text-2xl md:text-headline-md">
+                <a href="#" class="hover:opacity-60 transition-opacity">IG.</a>
+                <a href="#" class="hover:opacity-60 transition-opacity">LI.</a>
+                <a href="#" class="hover:opacity-60 transition-opacity">TK.</a>
+                <a href="#" class="hover:opacity-60 transition-opacity">YT.</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="flex items-center justify-center md:justify-end">
+          <div class="w-32 h-32 md:w-48 md:h-48 rounded-full border-[8px] md:border-[10px] border-on-primary-container flex items-center justify-center group cursor-pointer hover:bg-on-primary-container transition-all duration-500">
+            <span class="material-symbols-outlined text-5xl md:text-7xl text-on-primary-container group-hover:text-primary-container transition-colors">arrow_outward</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="w-full bg-on-surface text-on-tertiary py-10 md:py-block-gap">
+    <div class="max-w-7xl mx-auto px-margin-mobile md:px-margin-desktop">
+      <div class="flex flex-col md:flex-row justify-between items-center gap-6 md:gap-8 mb-6 md:mb-8 border-b border-tertiary-container pb-6 md:pb-8">
+        <div class="flex items-center gap-3 md:gap-4">
+          <div class="w-10 h-10 md:w-12 md:h-12 bg-primary flex items-center justify-center text-on-primary font-display text-xl md:text-2xl">B</div>
+          <span class="font-display text-2xl md:text-headline-lg uppercase">BEM UMS</span>
+        </div>
+        <div class="flex flex-wrap justify-center gap-4 md:gap-6">
+          <a href="#" class="text-on-tertiary hover:text-primary-container transition-colors font-body text-label-sm uppercase tracking-widest text-xs md:text-label-sm">Instagram</a>
+          <a href="#" class="text-on-tertiary hover:text-primary-container transition-colors font-body text-label-sm uppercase tracking-widest text-xs md:text-label-sm">LinkedIn</a>
+          <a href="#" class="text-on-tertiary hover:text-primary-container transition-colors font-body text-label-sm uppercase tracking-widest text-xs md:text-label-sm">TikTok</a>
+          <a href="#" class="text-on-tertiary hover:text-primary-container transition-colors font-body text-label-sm uppercase tracking-widest text-xs md:text-label-sm">YouTube</a>
+        </div>
+      </div>
+      <div class="text-center font-body text-label-sm tracking-widest text-tertiary-fixed-dim uppercase opacity-60 text-xs md:text-label-sm">© 2026 BEM UMS. ALL RIGHTS RESERVED</div>
+    </div>
+  </footer>
+
+  <script src="js/script.js"></script>
+</body>
+</html>
