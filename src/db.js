@@ -6,8 +6,8 @@ const DEFAULT_DATA = {
   currentPeriod: "2026",
   pimpinan: {
     "2026": [
-      { id: 1, name: "Muhammad Fadhil", role: "Ketua Umum BEM UMS", photo: "/assets/foto_presiden.jpg", bio: "Memimpin dengan visi transformasi progresif untuk kemaslahatan mahasiswa UMS." },
-      { id: 2, name: "Siti Rahmawati", role: "Wakil Ketua Umum BEM UMS", photo: "/assets/foto_wakil.jpg", bio: "Sinergi aksi dan kolaborasi nyata untuk pelayanan terbaik mahasiswa UMS." }
+      { id: 1, name: "Muhammad Naufal Aulia Darojat", role: "Ketua Umum BEM UMS", photo: "/assets/foto_presiden.jpg", bio: "Memimpin dengan visi transformasi progresif untuk kemaslahatan mahasiswa UMS." },
+      { id: 2, name: "Muhammad Faris Abid Muwaffaq", role: "Wakil Ketua Umum BEM UMS", photo: "/assets/foto_wakil.jpg", bio: "Sinergi aksi dan kolaborasi nyata untuk pelayanan terbaik mahasiswa UMS." }
     ],
     "2025": [
       { id: 3, name: "Ahmad Dahlan", role: "Ketua Umum BEM UMS", photo: "", bio: "Membangun harmoni gerakan mahasiswa." },
@@ -114,14 +114,16 @@ export const getDB = () => {
     return DEFAULT_DATA;
   }
   const parsed = JSON.parse(data);
-  // Auto-patch photo for Ketua Umum & Wakil in existing localStorage session
+  // Auto-patch photo & names for Ketua Umum & Wakil in existing localStorage session
   if (parsed.pimpinan && parsed.pimpinan["2026"]) {
     const fadhil = parsed.pimpinan["2026"].find(p => p.id === 1);
     if (fadhil) {
+      fadhil.name = "Muhammad Naufal Aulia Darojat";
       fadhil.photo = "/assets/foto_presiden.jpg";
     }
     const rahma = parsed.pimpinan["2026"].find(p => p.id === 2);
     if (rahma) {
+      rahma.name = "Muhammad Faris Abid Muwaffaq";
       rahma.photo = "/assets/foto_wakil.jpg";
     }
     localStorage.setItem("bem_ums_db", JSON.stringify(parsed));
