@@ -98,7 +98,7 @@ export default function Struktural({ db }) {
                     <span className={`text-[10px] font-display uppercase tracking-widest ${
                       selectedDept?.id === d.id ? 'text-white border-white' : 'text-black border-black'
                     } border-b pb-0.5`}>
-                      Lihat Jajaran Anggota
+                      Lihat Jajaran Kementerian
                     </span>
                     <span className="material-symbols-outlined text-sm">arrow_forward_ios</span>
                   </div>

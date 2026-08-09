@@ -81,7 +81,7 @@ export default function Hero({ db, setActivePage }) {
       <section className="w-full bg-[#1a1c1c] py-12 px-6 md:px-12 border-y-4 border-black text-white">
         <div className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-3 gap-8 text-center sm:text-left">
           <div className="flex flex-col items-center sm:items-start sm:border-r border-neutral-700/60 last:border-r-0 pr-4">
-            <span className="font-display text-primary text-6xl md:text-8xl">15+</span>
+            <span className="font-display text-primary text-6xl md:text-8xl">15</span>
             <span className="font-body text-xs font-bold text-neutral-300 uppercase mt-1">Tahun Berdiri & Mengabdi</span>
           </div>
           <div className="flex flex-col items-center sm:items-start sm:border-r border-neutral-700/60 last:border-r-0 pr-4">

@@ -6,8 +6,8 @@ const DEFAULT_DATA = {
   currentPeriod: "2026",
   pimpinan: {
     "2026": [
-      { id: 1, name: "Muhammad Naufal Aulia Darojat", role: "Ketua Umum BEM UMS", photo: "/assets/foto_presiden.jpg", bio: "Memimpin dengan visi transformasi progresif untuk kemaslahatan mahasiswa UMS." },
-      { id: 2, name: "Muhammad Faris Abid Muwaffaq", role: "Wakil Ketua Umum BEM UMS", photo: "/assets/foto_wakil.jpg", bio: "Sinergi aksi dan kolaborasi nyata untuk pelayanan terbaik mahasiswa UMS." }
+      { id: 1, name: "Muhammad Naufal Aulia Darojat", role: "Presiden Mahasiswa", photo: "/assets/foto_presiden.jpg", bio: "Memimpin dengan visi transformasi progresif untuk kemaslahatan mahasiswa UMS." },
+      { id: 2, name: "Muhammad Faris Abid Muwaffaq", role: "Wakil Presiden Mahasiswa", photo: "/assets/foto_wakil.jpg", bio: "Sinergi aksi dan kolaborasi nyata untuk pelayanan terbaik mahasiswa UMS." }
     ],
     "2025": [
       { id: 3, name: "Ahmad Dahlan", role: "Ketua Umum BEM UMS", photo: "", bio: "Membangun harmoni gerakan mahasiswa." },
@@ -18,28 +18,28 @@ const DEFAULT_DATA = {
     "2026": [
       { id: 1, name: "Kementerian Dalam Negeri", desc: "Mengoordinasikan hubungan internal organisasi, fakultas, dan lembaga mahasiswa di lingkungan UMS.", members: [
         { name: "Andi Saputra", title: "Menteri" },
-        { name: "Rina Astuti", title: "Sekretaris Kementerian" },
-        { name: "Budi Cahyono", title: "Dirjen Hubungan Internal" }
+        { name: "Rina Astuti", title: "Sekretaris Menteri" },
+        { name: "Budi Cahyono", title: "Staff Menteri" }
       ]},
       { id: 2, name: "Kementerian Luar Negeri", desc: "Membangun jaringan kemitraan strategis eksternal dengan BEM universitas lain, media, dan instansi nasional.", members: [
         { name: "Farhan Hakim", title: "Menteri" },
-        { name: "Aisyah Nabila", title: "Sekretaris Kementerian" }
+        { name: "Aisyah Nabila", title: "Sekretaris Menteri" }
       ]},
       { id: 3, name: "Kementerian Advokasi & Kesejahteraan Mahasiswa", desc: "Mengawal kebijakan kampus, memperjuangkan hak-hak akademik dan finansial mahasiswa UMS.", members: [
         { name: "Deni Prasetyo", title: "Menteri" },
-        { name: "Eka Lestari", title: "Dirjen Kesejahteraan" }
+        { name: "Eka Lestari", title: "Staff Menteri" }
       ]},
       { id: 4, name: "Kementerian Pemberdayaan Sumber Daya Mahasiswa", desc: "Menyelenggarakan pelatihan kepemimpinan, kaderisasi, dan pengembangan potensi mahasiswa.", members: [
         { name: "Gilang Ramadhan", title: "Menteri" },
-        { name: "Mega Utami", title: "Dirjen Kaderisasi" }
+        { name: "Mega Utami", title: "Staff Menteri" }
       ]},
       { id: 5, name: "Kementerian Seni, Olahraga & Kebudayaan", desc: "Mewadahi minat, bakat, dan apresiasi mahasiswa di bidang seni, olahraga, dan budaya.", members: [
         { name: "Heri Wibowo", title: "Menteri" },
-        { name: "Putri Amanda", title: "Dirjen Olahraga" }
+        { name: "Putri Amanda", title: "Staff Menteri" }
       ]},
       { id: 6, name: "Kementerian Sosial & Pengabdian Masyarakat", desc: "Melaksanakan program pengabdian, tanggap bencana, dan pemberdayaan masyarakat sekitar.", members: [
         { name: "Indra Wijaya", title: "Menteri" },
-        { name: "Ria Safitri", title: "Dirjen Aksi Sosial" }
+        { name: "Ria Safitri", title: "Staff Menteri" }
       ]}
     ],
     "2025": [
@@ -114,20 +114,36 @@ export const getDB = () => {
     return DEFAULT_DATA;
   }
   const parsed = JSON.parse(data);
-  // Auto-patch photo & names for Ketua Umum & Wakil in existing localStorage session
+  // Auto-patch photo, names & roles for Ketua Umum & Wakil in existing localStorage session
   if (parsed.pimpinan && parsed.pimpinan["2026"]) {
     const fadhil = parsed.pimpinan["2026"].find(p => p.id === 1);
     if (fadhil) {
       fadhil.name = "Muhammad Naufal Aulia Darojat";
+      fadhil.role = "Presiden Mahasiswa";
       fadhil.photo = "/assets/foto_presiden.jpg";
     }
     const rahma = parsed.pimpinan["2026"].find(p => p.id === 2);
     if (rahma) {
       rahma.name = "Muhammad Faris Abid Muwaffaq";
+      rahma.role = "Wakil Presiden Mahasiswa";
       rahma.photo = "/assets/foto_wakil.jpg";
     }
-    localStorage.setItem("bem_ums_db", JSON.stringify(parsed));
   }
+
+  // Auto-patch kementerian member roles
+  if (parsed.kementerian && parsed.kementerian["2026"]) {
+    parsed.kementerian["2026"].forEach(k => {
+      k.members.forEach(m => {
+        if (m.title === "Sekretaris Kementerian" || m.title === "Sekretaris Kabinet") {
+          m.title = "Sekretaris Menteri";
+        }
+        if (m.title.startsWith("Dirjen") || m.title.startsWith("Direktur")) {
+          m.title = "Staff Menteri";
+        }
+      });
+    });
+  }
+  localStorage.setItem("bem_ums_db", JSON.stringify(parsed));
   return parsed;
 };
 

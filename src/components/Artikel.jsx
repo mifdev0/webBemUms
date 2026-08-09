@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 
 export default function Artikel({ db }) {
   const [selectedCategory, setSelectedCategory] = useState('Semua');
+  const [activeArticle, setActiveArticle] = useState(null);
 
   const categories = db.categories || ["Semua"];
   const articles = db.articles || [];
@@ -82,7 +83,10 @@ export default function Artikel({ db }) {
                 </div>
 
                 <div className="p-5 pt-0">
-                  <button className="w-full neo-btn text-xs py-2 bg-neutral-100 text-black hover:bg-neutral-200 border-2 shadow-[2px_2px_0px_0px_#000] active:translate-y-1">
+                  <button 
+                    onClick={() => setActiveArticle(a)}
+                    className="w-full neo-btn text-xs py-2 bg-neutral-100 text-black hover:bg-neutral-200 border-2 shadow-[2px_2px_0px_0px_#000] active:translate-y-1"
+                  >
                     BACA SELENGKAPNYA
                   </button>
                 </div>
@@ -90,6 +94,42 @@ export default function Artikel({ db }) {
             ))
           )}
         </div>
+
+        {/* Dynamic Article Detail Modal Overlay */}
+        {activeArticle && (
+          <div className="fixed inset-0 bg-black/60 backdrop-blur-xs flex items-center justify-center p-4 z-50 animate-fade-in">
+            <div className="bg-white border-4 border-black p-6 md:p-8 max-w-2xl w-full shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] relative space-y-6 max-h-[85vh] overflow-y-auto">
+              <button 
+                onClick={() => setActiveArticle(null)}
+                className="absolute top-4 right-4 border-2 border-black px-2.5 py-0.5 hover:bg-neutral-100 font-display text-xs uppercase font-black"
+              >
+                CLOSE [×]
+              </button>
+              
+              <div>
+                <span className="bg-black text-white text-[10px] font-display uppercase tracking-widest px-3 py-1 border border-black inline-block mb-3">
+                  {activeArticle.category}
+                </span>
+                <span className="text-[10px] font-body text-secondary uppercase font-bold block mb-1">Diterbitkan: {activeArticle.date}</span>
+                <h2 className="text-2xl md:text-3xl font-display uppercase tracking-tight leading-tight text-black font-extrabold">
+                  {activeArticle.title}
+                </h2>
+              </div>
+
+              {activeArticle.thumbnail && (
+                <div className="aspect-[16/9] border-3 border-black overflow-hidden bg-neutral-200">
+                  <img src={activeArticle.thumbnail} alt={activeArticle.title} className="w-full h-full object-cover" />
+                </div>
+              )}
+
+              <div className="border-t-2 border-black pt-4">
+                <p className="text-sm font-body text-secondary leading-relaxed whitespace-pre-wrap">
+                  {activeArticle.desc}
+                </p>
+              </div>
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );

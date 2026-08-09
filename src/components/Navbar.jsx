@@ -3,6 +3,7 @@ import { Menu, X, ShieldAlert } from 'lucide-react';
 
 export default function Navbar({ activePage, setActivePage }) {
   const [isOpen, setIsOpen] = useState(false);
+  const [dropdownOpen, setDropdownOpen] = useState(false);
 
   const menuItems = [
     { id: 'beranda', label: 'Beranda' },
@@ -49,26 +50,40 @@ export default function Navbar({ activePage, setActivePage }) {
           ))}
           
           {/* Submenu for interactive services */}
-          <div className="relative group">
-            <button className="font-body text-xs font-bold uppercase tracking-wider text-black hover:text-primary flex items-center gap-1 cursor-pointer pb-2">
+          <div 
+            className="relative"
+            onMouseEnter={() => setDropdownOpen(true)}
+            onMouseLeave={() => setDropdownOpen(false)}
+          >
+            <button 
+              type="button"
+              onClick={() => setDropdownOpen(!dropdownOpen)}
+              className="font-body text-xs font-bold uppercase tracking-wider text-black hover:text-primary flex items-center gap-1 cursor-pointer pb-2"
+            >
               Layanan <span className="text-[10px]">▼</span>
             </button>
             {/* Dropdown wrapper container with no empty physical hover gap */}
-            <div className="absolute right-0 top-full pt-1 w-48 hidden group-hover:block z-50">
-              <div className="bg-white border-3 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
-                {services.map(s => (
-                  <button
-                    key={s.id}
-                    onClick={() => setActivePage(s.id)}
-                    className={`w-full text-left font-body text-xs font-bold uppercase p-3 hover:bg-neutral-100 border-b border-black last:border-0 cursor-pointer ${
-                      activePage === s.id ? 'text-primary' : 'text-black'
-                    }`}
-                  >
-                    {s.label}
-                  </button>
-                ))}
+            {dropdownOpen && (
+              <div className="absolute right-0 top-full pt-1 w-48 z-50">
+                <div className="bg-white border-3 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
+                  {services.map(s => (
+                    <button
+                      key={s.id}
+                      type="button"
+                      onClick={() => {
+                        setActivePage(s.id);
+                        setDropdownOpen(false);
+                      }}
+                      className={`w-full text-left font-body text-xs font-bold uppercase p-3 hover:bg-neutral-100 border-b border-black last:border-0 cursor-pointer ${
+                        activePage === s.id ? 'text-primary' : 'text-black'
+                      }`}
+                    >
+                      {s.label}
+                    </button>
+                  ))}
+                </div>
               </div>
-            </div>
+            )}
           </div>
         </nav>
 
